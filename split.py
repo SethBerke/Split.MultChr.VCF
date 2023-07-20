@@ -33,7 +33,7 @@ for i in range(1, 23):
         print(find_line_with_target(file_path, chromosome))
     else:
         lower_bound = find_line_with_target(file_path, chromosome)
-        upper_bound = find_line_with_target(file_path, "LAST")
+        upper_bound = find_line_with_target(file_path, "LAST") + 1
         print(find_line_with_target(file_path, chromosome))
     if lower_bound is not None and upper_bound is not None:
         chrRanges[chromosome] = Bounds(lower_bound, upper_bound - 1)
@@ -60,4 +60,11 @@ def writeFiles(input_file_path, output_file_path, lower_limit, upper_limit, head
 for i in range(1, 23):
     chromosome = "chr" + str(i)
     filename = "chr" + str(i) + ".vcf"
+    print("ITERATION: ", i)
+    print("INPUT FILE PATH", file_path)
+    print("OUTPUT FILE NAME", filename)
+    print("CHR LOWER BOUND", chrRanges[chromosome].lowerBound)
+    print("CHR UPPER BOUND", chrRanges[chromosome].upperBound)
+    print("HEADER LOWER LIMIT", header_lower_limit)
+    print("HEADER UPPER LIMIT", header_upper_limit)
     writeFiles(file_path,filename,chrRanges[chromosome].lowerBound,chrRanges[chromosome].upperBound, header_lower_limit, header_upper_limit)
